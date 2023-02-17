@@ -28,10 +28,8 @@ private:
     template <typename Func,
               typename... Args,
               typename Rtrn = typename std::result_of<Func(Args...)>::type>
-    auto make_task(Func&& func, Args&&... args)
-        -> std::packaged_task<Rtrn(void)> {
-        auto aux =
-            std::bind(std::forward<Func>(func), std::forward<Args>(args)...);
+    auto make_task(Func&& func, Args&&... args) -> std::packaged_task<Rtrn(void)> {
+        auto aux = std::bind(std::forward<Func>(func), std::forward<Args>(args)...);
         return std::packaged_task<Rtrn(void)>(aux);
     }
 
@@ -55,9 +53,7 @@ public:
                 {  // lock this section for waiting
                     std::unique_lock<std::mutex> unique_lock(mutex);
 
-                    auto predicate = [this]() -> bool {
-                        return (stop_pool) || !(tasks.empty());
-                    };
+                    auto predicate = [this]() -> bool { return (stop_pool) || !(tasks.empty()); };
 
                     cv.wait(unique_lock, predicate);
 
