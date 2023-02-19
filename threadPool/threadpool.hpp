@@ -73,7 +73,7 @@ public:
                 }
             }
         };
-        
+
         // initially spawn capacity many threads
         for (uint64_t id = 0; id < capacity; id++) {
             threads.emplace_back(wait_loop);
