@@ -31,12 +31,11 @@ void make_ranks(std::vector<Rank>* substr_rank, std::vector<int>* rank, int n) {
     }
 }
 
-void compute_suffix_array(char* T, int n) {
+void compute_suffix_array(char* T, int n, std::vector<int>* SA) {
     std::vector<Rank> substr_rank;
     substr_rank.resize(n);
-    std::vector<int> rank, SA;
+    std::vector<int> rank;
     rank.resize(n);
-    SA.resize(n);
 
     for (int i = 0; i < n; ++i) {
         substr_rank[i].left_rank = int(T[i]);
@@ -48,9 +47,6 @@ void compute_suffix_array(char* T, int n) {
         substr_rank[i].index = i;
     }
     std::stable_sort(std::begin(substr_rank), std::end(substr_rank), compareLeftAndRightRank());
-    /*for (std::vector<Rank>::iterator it = substr_rank.begin(); it != substr_rank.end(); ++it) {
-        std::cout << it->left_rank << std::endl;
-    }*/
     int l = 2;
     while (l < n) {
         make_ranks(&substr_rank, &rank, n);
@@ -67,15 +63,17 @@ void compute_suffix_array(char* T, int n) {
         l = l * 2;
     }
     for (int i = 0; i < n; ++i) {
-        SA[i] = substr_rank[i].index + 1;
-    }
-    for (int i = 0; i < n; ++i) {
-        std::cout << SA[i] << std::endl;
+        (*SA)[i] = substr_rank[i].index;
     }
 }
 
 int main() {
     char* a("ratatat");
-    compute_suffix_array(a, 7);
+    std::vector<int> SA;
+    SA.resize(7);
+    compute_suffix_array(a, 7, &SA);
+    for (int i = 0; i < 7; ++i) {
+        std::cout << SA[i] + 1 << std::endl;
+    }
     return 0;
 }
