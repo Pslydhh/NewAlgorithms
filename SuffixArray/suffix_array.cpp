@@ -46,7 +46,8 @@ void compute_suffix_array(char* T, int n, std::vector<int>* SA) {
         }
         substr_rank[i].index = i;
     }
-    // maybe use radix sort to instead.
+    // Actually, radix sort can sort through first running countng sort basd on right-rank then 
+    // running counting sort based on left-rank.
     std::stable_sort(std::begin(substr_rank), std::end(substr_rank), compareLeftAndRightRank());
     int l = 2;
     while (l < n) {
