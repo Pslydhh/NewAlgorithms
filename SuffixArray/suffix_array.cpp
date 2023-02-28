@@ -50,6 +50,7 @@ void compute_suffix_array(char* T, int n, std::vector<int>* SA) {
     // running counting sort based on left-rank.
     std::stable_sort(std::begin(substr_rank), std::end(substr_rank), compareLeftAndRightRank());
     int l = 2;
+    // until length is larger than n.
     while (l < n) {
         make_ranks(&substr_rank, &rank, n);
         for (int i = 0; i < n; ++i) {
