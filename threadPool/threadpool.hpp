@@ -52,7 +52,10 @@ public:
                 std::function<void(void)> task;
                 {  // lock this section for waiting
                     std::unique_lock<std::mutex> unique_lock(mutex);
-
+                    // actions must be performed on
+                    // wake-up if (i) the thread pool
+                    // has been stopped, or (ii) there
+                    // are still tasks to be processed
                     auto predicate = [this]() -> bool { return (stop_pool) || !(tasks.empty()); };
 
                     cv.wait(unique_lock, predicate);
