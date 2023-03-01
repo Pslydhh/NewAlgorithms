@@ -52,6 +52,7 @@ public:
                 std::function<void(void)> task;
                 {  // lock this section for waiting
                     std::unique_lock<std::mutex> unique_lock(mutex);
+
                     // actions must be performed on
                     // wake-up if (i) the thread pool
                     // has been stopped, or (ii) there
