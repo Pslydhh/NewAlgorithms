@@ -59,6 +59,8 @@ public:
                     // are still tasks to be processed
                     auto predicate = [this]() -> bool { return (stop_pool) || !(tasks.empty()); };
 
+                    // wait to be waken up on
+                    // aforementioned conditions
                     cv.wait(unique_lock, predicate);
 
                     if (stop_pool && tasks.empty())
