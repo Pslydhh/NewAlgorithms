@@ -63,6 +63,8 @@ public:
                     // aforementioned conditions
                     cv.wait(unique_lock, predicate);
 
+                    // exit if thread pool stopped
+		    // and no tasks to be performed
                     if (stop_pool && tasks.empty())
                         return;
 
