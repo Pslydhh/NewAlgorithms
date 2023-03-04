@@ -64,10 +64,11 @@ public:
                     cv.wait(unique_lock, predicate);
 
                     // exit if thread pool stopped
-		    // and no tasks to be performed
+                    // and no tasks to be performed
                     if (stop_pool && tasks.empty())
                         return;
 
+                    // else extract task from queue
                     task = std::move(tasks.front());
                     tasks.pop();
                     before_task_hook();
