@@ -72,7 +72,7 @@ public:
                     task = std::move(tasks.front());
                     tasks.pop();
                     before_task_hook();
-                }
+                } // here we release the lock
 
                 task();
 
