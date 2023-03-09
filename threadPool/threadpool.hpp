@@ -79,7 +79,7 @@ public:
                 {  // adjust the thread counter
                     std::lock_guard<std::mutex> lock_guard(mutex);
                     after_task_hook();
-                }
+                } // here we release the lock
             }
         };
 
