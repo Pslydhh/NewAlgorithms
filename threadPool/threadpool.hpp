@@ -79,7 +79,7 @@ public:
                 {  // adjust the thread counter
                     std::lock_guard<std::mutex> lock_guard(mutex);
                     after_task_hook();
-                } // here we release the lock
+                }  // here we release the lock
             }
         };
 
@@ -90,7 +90,7 @@ public:
     }
 
     ~ThreadPool() {
-        {
+        {  // acquire a scoped lock
             std::lock_guard<std::mutex> lock_guard(mutex);
             stop_pool = true;
         }
