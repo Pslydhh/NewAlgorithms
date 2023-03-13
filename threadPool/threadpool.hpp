@@ -92,8 +92,10 @@ public:
     ~ThreadPool() {
         {  // acquire a scoped lock
             std::lock_guard<std::mutex> lock_guard(mutex);
+            // and subsequently alter
+            // the global state to stop
             stop_pool = true;
-        }
+        }   // here we release the lock
 
         cv.notify_all();
 
