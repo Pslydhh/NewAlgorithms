@@ -96,7 +96,8 @@ public:
             // the global state to stop
             stop_pool = true;
         }   // here we release the lock
-
+        
+        // signal all threads
         cv.notify_all();
 
         for (auto& thread : threads)
