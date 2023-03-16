@@ -100,6 +100,7 @@ public:
         // signal all threads
         cv.notify_all();
 
+        // finally join all threads
         for (auto& thread : threads)
             thread.join();
     }
