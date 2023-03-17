@@ -109,6 +109,9 @@ public:
               typename... Args,
               typename Rtrn = typename std::result_of<Func(Args...)>::type>
     auto enqueue(Func&& func, Args&&... args) -> std::future<Rtrn> {
+        
+        // create the task, get the future
+        // and wrap task in a shared pointer
         auto task = make_task(func, args...);
         auto future = task.get_future();
         auto task_ptr = std::make_shared<decltype(task)>(std::move(task));
