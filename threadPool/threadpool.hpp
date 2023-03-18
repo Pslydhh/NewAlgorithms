@@ -117,6 +117,7 @@ public:
         auto task_ptr = std::make_shared<decltype(task)>(std::move(task));
 
         {
+            // lock the scope
             std::lock_guard<std::mutex> lock_guard(mutex);
             if (stop_pool)
                 throw std::runtime_error("enqueue on stopped ThreadPool");
