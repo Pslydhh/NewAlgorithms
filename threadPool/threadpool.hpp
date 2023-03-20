@@ -119,6 +119,8 @@ public:
         {
             // lock the scope
             std::lock_guard<std::mutex> lock_guard(mutex);
+            
+            // you cannot reuse pool after being stopped
             if (stop_pool)
                 throw std::runtime_error("enqueue on stopped ThreadPool");
             auto payload = [task_ptr]() -> void { task_ptr->operator()(); };
