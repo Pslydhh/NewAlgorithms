@@ -123,6 +123,9 @@ public:
             // you cannot reuse pool after being stopped
             if (stop_pool)
                 throw std::runtime_error("enqueue on stopped ThreadPool");
+            
+            // wrap the task in a generic void
+            // function void -> void
             auto payload = [task_ptr]() -> void { task_ptr->operator()(); };
             tasks.emplace(payload);
         }
