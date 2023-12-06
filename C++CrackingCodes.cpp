@@ -26,6 +26,6 @@ int main() {
     cout << "begin: " << endl;
     string test_file = "testc++program.txt";
     printLast10Lines(test_file.c_str());
-    cout << "end." << endl;
+    cout << "end" << endl;
     return 0;
 }
